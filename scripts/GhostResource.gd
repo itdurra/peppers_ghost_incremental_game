@@ -1,6 +1,6 @@
 class_name GhostResource extends Resource
 
-#a container for ghosts
+#a container for ghosts data
 
 @export_category("set_these")
 @export var ghost_name: String = "Ghost"
