@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EntityScenesResource" format=3 uid="uid://c0u26oq8dkufd"]
+
+[ext_resource type="PackedScene" uid="uid://brylxx716t11d" path="res://scenes/ghost_entities/ghost.tscn" id="1_pg0qt"]
+[ext_resource type="Script" uid="uid://brxf65ul1xpju" path="res://scripts/EntityScenesResource.gd" id="1_s06f7"]
+[ext_resource type="PackedScene" uid="uid://ds74bqauhxb42" path="res://scenes/ghost_entities/spirit.tscn" id="2_he3rn"]
+[ext_resource type="PackedScene" uid="uid://ba25o3s4vqxll" path="res://scenes/ghost_entities/whisp.tscn" id="3_pkaqy"]
+[ext_resource type="PackedScene" uid="uid://ceu20mdyhjqru" path="res://scenes/reciever_entities/wishing_well.tscn" id="4_ybg7i"]
+
+[resource]
+script = ExtResource("1_s06f7")
+ghost_scene_dict = Dictionary[int, PackedScene]({
+0: ExtResource("1_pg0qt"),
+1: ExtResource("2_he3rn"),
+2: ExtResource("3_pkaqy")
+})
+reciever_scene_dict = Dictionary[int, PackedScene]({
+0: ExtResource("4_ybg7i")
+})
+metadata/_custom_type_script = "uid://brxf65ul1xpju"

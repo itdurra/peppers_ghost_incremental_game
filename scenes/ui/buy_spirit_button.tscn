@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bocmsiyku7mwr"]
+
+[ext_resource type="Script" uid="uid://b7221hk8o4a0s" path="res://scripts/ui/buy_ghost_button.gd" id="2_3e8r0"]
+[ext_resource type="Resource" uid="uid://bdf84eh5sd0st" path="res://resource/PlayerResource.tres" id="3_gjvyq"]
+[ext_resource type="Resource" uid="uid://2j5kxqhiivuf" path="res://resource/ghosts/SpiritResource.tres" id="4_unexm"]
+[ext_resource type="Script" uid="uid://d11e1vv7mw56b" path="res://scripts/components/sprite_switcher_component.gd" id="4_uofus"]
+[ext_resource type="Texture2D" uid="uid://wyt8h5eeomgt" path="res://pngs/spirit_levels/spirit.png" id="5_3e8r0"]
+[ext_resource type="Texture2D" uid="uid://dpqhf8dfj7vde" path="res://pngs/white_square_2x2.png" id="5_xlp1p"]
+
+[node name="spawn_spirit" type="Button" unique_id=717487970 node_paths=PackedStringArray("cooldown_bar")]
+clip_children = 2
+custom_minimum_size = Vector2(400, 50)
+text = "Silver Spirit"
+icon = ExtResource("5_3e8r0")
+expand_icon = true
+script = ExtResource("2_3e8r0")
+ghost_type = 1
+player_res = ExtResource("3_gjvyq")
+ghost_res = ExtResource("4_unexm")
+cooldown_bar = NodePath("TextureProgressBar")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1190617677]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 0
+offset_right = 70.0
+offset_bottom = 31.0
+mouse_filter = 0
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("5_xlp1p")
+
+[node name="SpriteSwitcherComponent" type="Node" parent="." unique_id=1832427724]
+script = ExtResource("4_uofus")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

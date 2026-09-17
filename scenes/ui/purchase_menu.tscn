@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://p06c036p1hv"]
+
+[ext_resource type="Theme" uid="uid://61m5tmf8rp2c" path="res://resource/ghost_ui.tres" id="1_jav11"]
+[ext_resource type="Script" uid="uid://bcmkaykjygxmk" path="res://scripts/ui/purchase_menu.gd" id="2_qi0na"]
+[ext_resource type="PackedScene" uid="uid://mqg30oyxvh83" path="res://scenes/ui/buy_ghost_button.tscn" id="3_cgahq"]
+[ext_resource type="Resource" uid="uid://c1kqsjboonfan" path="res://resource/ghosts/GhostResource.tres" id="4_jxps6"]
+[ext_resource type="Script" uid="uid://cp51ubun1fnrx" path="res://scripts/ui/ghost_price.gd" id="4_n27vx"]
+[ext_resource type="PackedScene" uid="uid://bocmsiyku7mwr" path="res://scenes/ui/buy_spirit_button.tscn" id="4_o8y3p"]
+[ext_resource type="Texture2D" uid="uid://c5uy8b54peelo" path="res://pngs/orb.png" id="5_cmsad"]
+[ext_resource type="PackedScene" uid="uid://sj34qcmjas4i" path="res://scenes/ui/buy_wisp_button.tscn" id="5_n27vx"]
+[ext_resource type="Resource" uid="uid://c4icbm1fxg8ig" path="res://resource/ghosts/WispResource.tres" id="6_n27vx"]
+[ext_resource type="Resource" uid="uid://2j5kxqhiivuf" path="res://resource/ghosts/SpiritResource.tres" id="8_spp1l"]
+
+[node name="PurchaseMenu" type="Control" unique_id=153599688]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_jav11")
+script = ExtResource("2_qi0na")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1482942294]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1901871755]
+layout_mode = 2
+
+[node name="Main_vbox" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=43470318]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/Main_vbox" unique_id=551358066]
+layout_mode = 2
+text = "Ghost Shop"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/Main_vbox" unique_id=806354440]
+layout_mode = 2
+columns = 2
+
+[node name="spawn_ghost" parent="PanelContainer/MarginContainer/Main_vbox/GridContainer" unique_id=717487970 instance=ExtResource("3_cgahq")]
+layout_mode = 2
+
+[node name="ghost_price" type="RichTextLabel" parent="PanelContainer/MarginContainer/Main_vbox/GridContainer" unique_id=691359287]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://pngs/orb.png[/img]1000"
+vertical_alignment = 1
+script = ExtResource("4_n27vx")
+path = ExtResource("5_cmsad")
+ghost_res = ExtResource("4_jxps6")
+
+[node name="spawn_spirit" parent="PanelContainer/MarginContainer/Main_vbox/GridContainer" unique_id=725873421 instance=ExtResource("4_o8y3p")]
+layout_mode = 2
+
+[node name="spirit_price" type="RichTextLabel" parent="PanelContainer/MarginContainer/Main_vbox/GridContainer" unique_id=13293399]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://pngs/orb.png[/img]1000"
+vertical_alignment = 1
+script = ExtResource("4_n27vx")
+path = ExtResource("5_cmsad")
+ghost_res = ExtResource("8_spp1l")
+
+[node name="spawn_wisp" parent="PanelContainer/MarginContainer/Main_vbox/GridContainer" unique_id=598354058 instance=ExtResource("5_n27vx")]
+layout_mode = 2
+
+[node name="wisp_price" type="RichTextLabel" parent="PanelContainer/MarginContainer/Main_vbox/GridContainer" unique_id=310574211]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://pngs/orb.png[/img]1000"
+vertical_alignment = 1
+script = ExtResource("4_n27vx")
+path = ExtResource("5_cmsad")
+ghost_res = ExtResource("6_n27vx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Main_vbox" unique_id=535379700]
+layout_mode = 2

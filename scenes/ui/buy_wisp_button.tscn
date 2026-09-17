@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://sj34qcmjas4i"]
+
+[ext_resource type="Script" uid="uid://b7221hk8o4a0s" path="res://scripts/ui/buy_ghost_button.gd" id="2_uqoyl"]
+[ext_resource type="Resource" uid="uid://bdf84eh5sd0st" path="res://resource/PlayerResource.tres" id="3_1v6g5"]
+[ext_resource type="Resource" uid="uid://c4icbm1fxg8ig" path="res://resource/ghosts/WispResource.tres" id="4_bre28"]
+[ext_resource type="Script" uid="uid://d11e1vv7mw56b" path="res://scripts/components/sprite_switcher_component.gd" id="4_ws2jg"]
+[ext_resource type="Texture2D" uid="uid://cb8kauaebmibv" path="res://pngs/wisp_levels/whisp.png" id="5_uqoyl"]
+[ext_resource type="Texture2D" uid="uid://dpqhf8dfj7vde" path="res://pngs/white_square_2x2.png" id="5_vhlkt"]
+
+[node name="spawn_wisp" type="Button" unique_id=717487970 node_paths=PackedStringArray("cooldown_bar")]
+clip_children = 2
+custom_minimum_size = Vector2(400, 50)
+text = "Green Whisp"
+icon = ExtResource("5_uqoyl")
+expand_icon = true
+script = ExtResource("2_uqoyl")
+ghost_type = 2
+player_res = ExtResource("3_1v6g5")
+ghost_res = ExtResource("4_bre28")
+cooldown_bar = NodePath("TextureProgressBar")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1806443847]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 0
+mouse_filter = 0
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("5_vhlkt")
+
+[node name="SpriteSwitcherComponent" type="Node" parent="." unique_id=1832427724]
+script = ExtResource("4_ws2jg")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

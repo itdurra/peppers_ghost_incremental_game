@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cm4xjww07vwqs"]
+
+[ext_resource type="Texture2D" uid="uid://cdqmmgm2mlvds" path="res://pngs/water.png" id="1_wvrdp"]
+
+[resource]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_wvrdp")
+texture_filter = 0

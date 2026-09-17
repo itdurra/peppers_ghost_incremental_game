@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://buda1y3nthghv"]
+
+[ext_resource type="Script" uid="uid://c84wgoskxcuva" path="res://scripts/ui/progress_bar.gd" id="1_46mgc"]
+[ext_resource type="Resource" uid="uid://bdf84eh5sd0st" path="res://resource/PlayerResource.tres" id="2_ydmtc"]
+[ext_resource type="Texture2D" uid="uid://c5uy8b54peelo" path="res://pngs/orb.png" id="3_aqhu8"]
+[ext_resource type="Texture2D" uid="uid://cdqmmgm2mlvds" path="res://pngs/water.png" id="4_w5apn"]
+
+[node name="ProgressBar" type="Control" unique_id=493097392 node_paths=PackedStringArray("progress_bar", "level_value", "exp_value", "exp_req_value", "coin_value", "water_value")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_46mgc")
+progress_bar = NodePath("VBoxContainer/ProgressBar")
+player_res = ExtResource("2_ydmtc")
+level_value = NodePath("VBoxContainer/GridContainer/LevelValue")
+exp_value = NodePath("VBoxContainer/GridContainer/ExpValue")
+exp_req_value = NodePath("VBoxContainer/GridContainer/ExpReqValue")
+coin_value = NodePath("VBoxContainer/GridContainer/CoinValue")
+water_value = NodePath("VBoxContainer/GridContainer/WaterValue")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1609363421]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 63.0
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer" unique_id=277364493]
+custom_minimum_size = Vector2(1920, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=143320926]
+layout_mode = 2
+columns = 3
+
+[node name="LevelLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1095500221]
+layout_mode = 2
+text = "Level"
+
+[node name="LevelIcon" type="TextureRect" parent="VBoxContainer/GridContainer" unique_id=480914838]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_aqhu8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="LevelValue" type="Label" parent="VBoxContainer/GridContainer" unique_id=1534161668]
+layout_mode = 2
+text = "1"
+
+[node name="ExpReqLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1531186115]
+layout_mode = 2
+text = "Exp. Req."
+
+[node name="ExpReqIcon" type="TextureRect" parent="VBoxContainer/GridContainer" unique_id=516148878]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_aqhu8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ExpReqValue" type="Label" parent="VBoxContainer/GridContainer" unique_id=1109857798]
+layout_mode = 2
+text = "1"
+
+[node name="ExpLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1494074488]
+layout_mode = 2
+text = "Exp."
+
+[node name="ExpIcon" type="TextureRect" parent="VBoxContainer/GridContainer" unique_id=1071857268]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_aqhu8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ExpValue" type="Label" parent="VBoxContainer/GridContainer" unique_id=1614536704]
+layout_mode = 2
+text = "1"
+
+[node name="CoinLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1213026988]
+layout_mode = 2
+text = "Coins"
+
+[node name="CoinIcon" type="TextureRect" parent="VBoxContainer/GridContainer" unique_id=607087609]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_aqhu8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CoinValue" type="Label" parent="VBoxContainer/GridContainer" unique_id=2026932808]
+layout_mode = 2
+text = "20"
+
+[node name="WaterLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1447683196]
+layout_mode = 2
+text = "Water"
+
+[node name="WaterIcon" type="TextureRect" parent="VBoxContainer/GridContainer" unique_id=529959880]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_w5apn")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="WaterValue" type="Label" parent="VBoxContainer/GridContainer" unique_id=720222065]
+layout_mode = 2
+text = "10"

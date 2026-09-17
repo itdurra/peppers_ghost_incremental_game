@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlayerResource" format=3 uid="uid://bdf84eh5sd0st"]
+
+[ext_resource type="Script" uid="uid://cy3fvtnpyv16t" path="res://scripts/PlayerResource.gd" id="1_3x7fj"]
+[ext_resource type="Script" uid="uid://cvb7x2ajqyk63" path="res://scripts/GhostResource.gd" id="1_beh57"]
+[ext_resource type="Resource" uid="uid://c1kqsjboonfan" path="res://resource/ghosts/GhostResource.tres" id="2_dt65s"]
+[ext_resource type="Resource" uid="uid://2j5kxqhiivuf" path="res://resource/ghosts/SpiritResource.tres" id="3_ltu4p"]
+[ext_resource type="Resource" uid="uid://c4icbm1fxg8ig" path="res://resource/ghosts/WispResource.tres" id="4_2wa5j"]
+[ext_resource type="Script" uid="uid://d3a1lv7y56id4" path="res://scripts/RecieverResource.gd" id="5_ybxcs"]
+[ext_resource type="Resource" uid="uid://bpcvsfdrnk6wx" path="res://resource/recievers/WishingWell.tres" id="6_vx10q"]
+
+[resource]
+script = ExtResource("1_3x7fj")
+ghosts = Array[ExtResource("1_beh57")]([ExtResource("2_dt65s"), ExtResource("3_ltu4p"), ExtResource("4_2wa5j")])
+recievers = Array[ExtResource("5_ybxcs")]([ExtResource("6_vx10q")])
+metadata/_custom_type_script = "uid://cy3fvtnpyv16t"

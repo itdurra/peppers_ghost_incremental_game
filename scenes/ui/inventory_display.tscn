@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://002rrv2ikym1"]
+
+[ext_resource type="Theme" uid="uid://61m5tmf8rp2c" path="res://resource/ghost_ui.tres" id="1_lp81k"]
+[ext_resource type="PackedScene" uid="uid://cjb8d575wtkfh" path="res://scenes/ui/inventory_display_bar.tscn" id="2_3afae"]
+[ext_resource type="Resource" uid="uid://c1kqsjboonfan" path="res://resource/ghosts/GhostResource.tres" id="3_5rvy3"]
+[ext_resource type="Resource" uid="uid://2j5kxqhiivuf" path="res://resource/ghosts/SpiritResource.tres" id="4_n84rb"]
+[ext_resource type="Resource" uid="uid://c4icbm1fxg8ig" path="res://resource/ghosts/WispResource.tres" id="5_fk8tg"]
+
+[node name="InventoryDisplay" type="Control" unique_id=1325825505]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_lp81k")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=69323952]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1747704252]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1621697365]
+layout_mode = 2
+
+[node name="ghost" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1952432420 instance=ExtResource("2_3afae")]
+layout_mode = 2
+ghost_res = ExtResource("3_5rvy3")
+
+[node name="spirit" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1130448351 instance=ExtResource("2_3afae")]
+layout_mode = 2
+ghost_res = ExtResource("4_n84rb")
+
+[node name="whisp" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=918754455 instance=ExtResource("2_3afae")]
+layout_mode = 2
+ghost_res = ExtResource("5_fk8tg")

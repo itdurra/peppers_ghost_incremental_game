@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://ceu20mdyhjqru"]
+
+[ext_resource type="Texture2D" uid="uid://bhdkxbncxlej0" path="res://pngs/wishing_well.png" id="1_cfnwo"]
+[ext_resource type="Script" uid="uid://cqqgc3np3ufls" path="res://scripts/reciever_entity.gd" id="1_yyefp"]
+[ext_resource type="Material" uid="uid://cm4xjww07vwqs" path="res://resource/water.tres" id="2_7gjhn"]
+[ext_resource type="Script" uid="uid://cgtulsunxhcmn" path="res://scripts/components/movement_component.gd" id="2_s8chh"]
+[ext_resource type="Material" uid="uid://dqcf8k1qrf5ut" path="res://resource/coin.tres" id="3_7gjhn"]
+[ext_resource type="Script" uid="uid://dic7ts0u86wo4" path="res://scripts/components/visual_effect_component.gd" id="5_7gjhn"]
+[ext_resource type="Script" uid="uid://ckoakwxhu8mxl" path="res://scripts/components/node3D_mouse_event_component.gd" id="7_clbec"]
+[ext_resource type="Script" uid="uid://d11e1vv7mw56b" path="res://scripts/components/sprite_switcher_component.gd" id="7_t37sp"]
+[ext_resource type="Resource" uid="uid://bpcvsfdrnk6wx" path="res://resource/recievers/WishingWell.tres" id="8_t37sp"]
+[ext_resource type="Script" uid="uid://bxiyg4xlsn3qe" path="res://scripts/components/effect_component.gd" id="10_lsqf8"]
+[ext_resource type="Resource" uid="uid://bdf84eh5sd0st" path="res://resource/PlayerResource.tres" id="11_hnd3p"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dtdkv"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_rpo26"]
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_anbaj"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_7gjhn"]
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7jox1"]
+size = Vector3(0.13, 0.13, 0.13)
+
+[node name="WishingWell" type="Node3D" unique_id=365239258 node_paths=PackedStringArray("sprite_switcher_component")]
+script = ExtResource("1_yyefp")
+reciever_res = ExtResource("8_t37sp")
+sprite_switcher_component = NodePath("SpriteSwitcherComponent")
+
+[node name="origin" type="Node3D" parent="." unique_id=357558537]
+
+[node name="pivot" type="Node3D" parent="origin" unique_id=516485229]
+
+[node name="visual_sprite" type="Sprite3D" parent="origin/pivot" unique_id=389196362]
+texture_filter = 0
+texture = ExtResource("1_cfnwo")
+
+[node name="water_particles" type="GPUParticles3D" parent="origin/pivot/visual_sprite" unique_id=468894280]
+material_override = ExtResource("2_7gjhn")
+emitting = false
+amount = 3
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_dtdkv")
+draw_pass_1 = SubResource("QuadMesh_rpo26")
+
+[node name="coin_particles" type="GPUParticles3D" parent="origin/pivot/visual_sprite" unique_id=1883226630]
+material_override = ExtResource("3_7gjhn")
+emitting = false
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_anbaj")
+draw_pass_1 = SubResource("QuadMesh_7gjhn")
+
+[node name="Area3D" type="Area3D" parent="origin/pivot/visual_sprite" unique_id=1925350209]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="origin/pivot/visual_sprite/Area3D" unique_id=1441762197]
+shape = SubResource("BoxShape3D_7jox1")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=1685339187 node_paths=PackedStringArray("origin", "pivot")]
+script = ExtResource("2_s8chh")
+origin = NodePath("../origin")
+pivot = NodePath("../origin/pivot/visual_sprite")
+movement_type = 5
+
+[node name="VisualEffectComponent" type="Node" parent="." unique_id=430229399 node_paths=PackedStringArray("coin_particles", "water_particles")]
+script = ExtResource("5_7gjhn")
+coin_particles = NodePath("../origin/pivot/visual_sprite/coin_particles")
+water_particles = NodePath("../origin/pivot/visual_sprite/water_particles")
+amount = 3
+
+[node name="3DSpriteMouseHoverMovement" type="Node" parent="." unique_id=1402831651 node_paths=PackedStringArray("pivot", "origin")]
+script = ExtResource("7_clbec")
+pivot = NodePath("../origin/pivot")
+origin = NodePath("../origin")
+
+[node name="SpriteSwitcherComponent" type="Node" parent="." unique_id=539797431 node_paths=PackedStringArray("visual_sprite")]
+script = ExtResource("7_t37sp")
+visual_sprite = NodePath("../origin/pivot/visual_sprite")
+res = ExtResource("8_t37sp")
+
+[node name="EffectComponent" type="Node" parent="." unique_id=532413377]
+script = ExtResource("10_lsqf8")
+player_res = ExtResource("11_hnd3p")
+reciever_res = ExtResource("8_t37sp")
+
+[connection signal="area_entered" from="origin/pivot/visual_sprite/Area3D" to="MovementComponent" method="_shake_movement"]
+[connection signal="area_entered" from="origin/pivot/visual_sprite/Area3D" to="VisualEffectComponent" method="emit_water"]
+[connection signal="input_event" from="origin/pivot/visual_sprite/Area3D" to="VisualEffectComponent" method="_on_area_3d_input_event"]
+[connection signal="input_event" from="origin/pivot/visual_sprite/Area3D" to="3DSpriteMouseHoverMovement" method="_on_area_3d_input_event"]
+[connection signal="input_event" from="origin/pivot/visual_sprite/Area3D" to="EffectComponent" method="_on_area_3d_input_event"]
+[connection signal="mouse_entered" from="origin/pivot/visual_sprite/Area3D" to="3DSpriteMouseHoverMovement" method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="origin/pivot/visual_sprite/Area3D" to="3DSpriteMouseHoverMovement" method="_on_area_3d_mouse_exited"]

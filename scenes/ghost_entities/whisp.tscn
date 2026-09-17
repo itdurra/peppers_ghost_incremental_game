@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://ba25o3s4vqxll"]
+
+[ext_resource type="Script" uid="uid://dppb85acgy8md" path="res://scripts/ghost_entity.gd" id="1_1hpac"]
+[ext_resource type="Texture2D" uid="uid://cb8kauaebmibv" path="res://pngs/wisp_levels/whisp.png" id="2_1hpac"]
+[ext_resource type="Script" uid="uid://cgtulsunxhcmn" path="res://scripts/components/movement_component.gd" id="3_ox3s6"]
+[ext_resource type="Script" uid="uid://bxiyg4xlsn3qe" path="res://scripts/components/effect_component.gd" id="4_k6c3x"]
+[ext_resource type="Resource" uid="uid://bdf84eh5sd0st" path="res://resource/PlayerResource.tres" id="5_1pepf"]
+[ext_resource type="Script" uid="uid://d11e1vv7mw56b" path="res://scripts/components/sprite_switcher_component.gd" id="6_eyij8"]
+[ext_resource type="Resource" uid="uid://c4icbm1fxg8ig" path="res://resource/ghosts/WispResource.tres" id="7_k6c3x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7jox1"]
+size = Vector3(0.13, 0.13, 0.13)
+
+[node name="Ghost" type="Node3D" unique_id=365239258 node_paths=PackedStringArray("sprite_switcher_component")]
+script = ExtResource("1_1hpac")
+sprite_switcher_component = NodePath("SpriteSwitcher")
+ghost_res = ExtResource("7_k6c3x")
+
+[node name="origin" type="Node3D" parent="." unique_id=357558537]
+
+[node name="pivot" type="Node3D" parent="origin" unique_id=516485229]
+
+[node name="visual_sprite" type="Sprite3D" parent="origin/pivot" unique_id=389196362]
+texture_filter = 0
+texture = ExtResource("2_1hpac")
+
+[node name="TODO_particles" type="GPUParticles3D" parent="origin/pivot/visual_sprite" unique_id=468894280]
+emitting = false
+
+[node name="Area3D" type="Area3D" parent="origin/pivot/visual_sprite" unique_id=1534386846]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="origin/pivot/visual_sprite/Area3D" unique_id=1441762197]
+shape = SubResource("BoxShape3D_7jox1")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=1685339187 node_paths=PackedStringArray("origin", "pivot")]
+script = ExtResource("3_ox3s6")
+origin = NodePath("../origin")
+pivot = NodePath("../origin/pivot")
+
+[node name="EffectComponent" type="Node" parent="." unique_id=430229399]
+script = ExtResource("4_k6c3x")
+player_res = ExtResource("5_1pepf")
+ghost_res = ExtResource("7_k6c3x")
+
+[node name="SpriteSwitcher" type="Node" parent="." unique_id=47691652 node_paths=PackedStringArray("visual_sprite")]
+script = ExtResource("6_eyij8")
+visual_sprite = NodePath("../origin/pivot/visual_sprite")
+res = ExtResource("7_k6c3x")
+
+[connection signal="area_entered" from="origin/pivot/visual_sprite/Area3D" to="EffectComponent" method="add_water"]

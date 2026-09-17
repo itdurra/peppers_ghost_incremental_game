@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://x6n3mtb8rlxq"]
+
+[ext_resource type="Script" uid="uid://bic7x10g5dqev" path="res://scripts/spawner.gd" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://bcd2c7qdmehsq" path="res://scripts/game_start.gd" id="2_sugp2"]
+[ext_resource type="Resource" uid="uid://c0u26oq8dkufd" path="res://resource/EntityScenesResource.tres" id="2_tipki"]
+[ext_resource type="Material" uid="uid://p35qswoj2kgd" path="res://resource/black_background.tres" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://p06c036p1hv" path="res://scenes/ui/purchase_menu.tscn" id="6_tefeu"]
+[ext_resource type="Material" uid="uid://crtwim4bj7hq1" path="res://resource/ground.tres" id="7_85g3d"]
+[ext_resource type="PackedScene" uid="uid://002rrv2ikym1" path="res://scenes/ui/inventory_display.tscn" id="9_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://buda1y3nthghv" path="res://scenes/ui/progress_bar.tscn" id="10_choun"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5hnri"]
+size = Vector2(30, 30)
+
+[sub_resource type="QuadMesh" id="QuadMesh_7jox1"]
+size = Vector2(30, 30)
+
+[node name="Main" type="Node3D" unique_id=425362487]
+
+[node name="center_spawn_point" type="Node3D" parent="." unique_id=1922569496]
+
+[node name="spawner" type="Node" parent="." unique_id=1624153897 node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("2_0wfyh")
+scene_res = ExtResource("2_tipki")
+spawn_point = NodePath("../center_spawn_point")
+
+[node name="game_start" type="Node" parent="." unique_id=1242823405]
+script = ExtResource("2_sugp2")
+
+[node name="ground2" type="MeshInstance3D" parent="." unique_id=1495941876]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.67238855, -0.70899975)
+mesh = SubResource("QuadMesh_5hnri")
+surface_material_override/0 = ExtResource("7_85g3d")
+
+[node name="wall" type="MeshInstance3D" parent="." unique_id=1716464532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9830141)
+mesh = SubResource("QuadMesh_7jox1")
+surface_material_override/0 = ExtResource("5_tbgi4")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1316731273]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5473344)
+
+[node name="InventoryDisplay" parent="." unique_id=1325825505 instance=ExtResource("9_ya4ey")]
+offset_left = 1365.0
+offset_top = 123.0
+offset_right = 1365.0
+offset_bottom = 123.0
+
+[node name="PurchaseMenu" parent="." unique_id=153599688 instance=ExtResource("6_tefeu")]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 52.0
+offset_top = -229.0
+offset_right = 52.0
+offset_bottom = -229.0
+grow_vertical = 2
+
+[node name="ProgressBar" parent="." unique_id=493097392 instance=ExtResource("10_choun")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1389370965]
+light_color = Color(0.524539, 0.51099735, 0.531111, 1)
+light_energy = 2.585

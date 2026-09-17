@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RecieverResource" format=3 uid="uid://bpcvsfdrnk6wx"]
+
+[ext_resource type="Script" uid="uid://d3a1lv7y56id4" path="res://scripts/RecieverResource.gd" id="1_spviq"]
+[ext_resource type="Texture2D" uid="uid://bhdkxbncxlej0" path="res://pngs/wishing_well.png" id="2_8kwt7"]
+
+[resource]
+script = ExtResource("1_spviq")
+sprite_dict = Dictionary[int, CompressedTexture2D]({
+1: ExtResource("2_8kwt7")
+})
+metadata/_custom_type_script = "uid://d3a1lv7y56id4"

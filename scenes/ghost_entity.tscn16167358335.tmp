@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://brylxx716t11d"]
+
+[ext_resource type="Script" uid="uid://cgtulsunxhcmn" path="res://scripts/movement_component.gd" id="1_ue252"]
+[ext_resource type="Texture2D" uid="uid://b3w60t3ecvak4" path="res://pngs/ghost.png" id="1_yfl8e"]
+
+[node name="GhostEntity" type="Node3D" unique_id=365239258]
+
+[node name="origin" type="Node3D" parent="." unique_id=357558537]
+
+[node name="pivot" type="Node3D" parent="origin" unique_id=516485229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="visual_sprite" type="Sprite3D" parent="origin/pivot" unique_id=389196362]
+texture = ExtResource("1_yfl8e")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=1685339187 node_paths=PackedStringArray("origin", "pivot")]
+script = ExtResource("1_ue252")
+origin = NodePath("../origin")
+pivot = NodePath("../origin/pivot/visual_sprite")
+offset = null
+movement_type = 1
+circle_offset = null
+circle_x_radius = null
+circle_y_radius = null
+oval_offset = null
+oval_x = null
+oval_y = null
+oval_duration = null
+u_offset = null
+u_rotation_max = null
+u_rotation_min = null
+u_duration = null
+eight_offset = null
+eight_x_radius = null
+eight_y_radius = null
+rotation_speed = null
+
+[node name="SpriteComponent" type="Node" parent="." unique_id=1322655373]
+
+[node name="EffectComponent" type="Node" parent="." unique_id=430229399]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=336460186]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.749622)
