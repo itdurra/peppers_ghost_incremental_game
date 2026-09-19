@@ -1,17 +1,21 @@
 [gd_scene format=3 uid="uid://mqg30oyxvh83"]
 
 [ext_resource type="Texture2D" uid="uid://b3w60t3ecvak4" path="res://pngs/ghost_levels/ghost.png" id="1_8rjot"]
+[ext_resource type="Theme" uid="uid://61m5tmf8rp2c" path="res://resource/ghost_ui.tres" id="1_wx06e"]
 [ext_resource type="Script" uid="uid://b7221hk8o4a0s" path="res://scripts/ui/buy_ghost_button.gd" id="2_wvuh6"]
 [ext_resource type="Resource" uid="uid://bdf84eh5sd0st" path="res://resource/PlayerResource.tres" id="3_wvuh6"]
-[ext_resource type="Script" uid="uid://d11e1vv7mw56b" path="res://scripts/components/sprite_switcher_component.gd" id="4_87d8w"]
 [ext_resource type="Texture2D" uid="uid://dpqhf8dfj7vde" path="res://pngs/white_square_2x2.png" id="4_uokcg"]
 [ext_resource type="Resource" uid="uid://c1kqsjboonfan" path="res://resource/ghosts/GhostResource.tres" id="4_ytkoc"]
 
 [node name="spawn_ghost" type="Button" unique_id=717487970 node_paths=PackedStringArray("cooldown_bar")]
 clip_children = 2
-custom_minimum_size = Vector2(400, 50)
-text = "Hungry Ghost"
+custom_minimum_size = Vector2(580, 150)
+offset_right = 580.0
+offset_bottom = 150.0
+theme = ExtResource("1_wx06e")
+text = "Bargaining"
 icon = ExtResource("1_8rjot")
+icon_alignment = 2
 expand_icon = true
 script = ExtResource("2_wvuh6")
 player_res = ExtResource("3_wvuh6")
@@ -19,16 +23,15 @@ ghost_res = ExtResource("4_ytkoc")
 cooldown_bar = NodePath("TextureProgressBar")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=232165820]
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(580, 150)
 layout_mode = 0
 offset_right = 70.0
 offset_bottom = 31.0
 mouse_filter = 0
 value = 100.0
+fill_mode = 1
 nine_patch_stretch = true
 texture_progress = ExtResource("4_uokcg")
-
-[node name="SpriteSwitcherComponent" type="Node" parent="." unique_id=1832427724]
-script = ExtResource("4_87d8w")
+tint_progress = Color(0.84705883, 0.7490196, 0.84705883, 1)
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

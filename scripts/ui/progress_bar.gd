@@ -11,6 +11,8 @@ extends Control
 @export var coin_value: Label
 @export var water_value: Label
 
+@export var level_up_effect: GPUParticles2D
+
 func _ready() -> void:
 	EventBus.connect("inventory_changed", _update_exp)
 
@@ -31,7 +33,13 @@ func _update_exp() -> void:
 	if !level_value || !coin_value || !water_value:
 		return
 
-	level_value.text = str(player_res.get_level())
+	#check if we leveled up
+	var temp_level: int = player_res.get_level()
+	if int(level_value.text) != temp_level:
+		level_up_effect.emitting = true
+
+	#set vars
+	level_value.text = str(temp_level)
 	coin_value.text = str(player_res.get_coins())
 	water_value.text = str(player_res.get_water())
 

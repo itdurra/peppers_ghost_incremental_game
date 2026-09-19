@@ -6,19 +6,23 @@
 [ext_resource type="Texture2D" uid="uid://ks3453i7fyoi" path="res://pngs/spirit_levels/spirit_level_3.png" id="4_rk8q8"]
 [ext_resource type="Texture2D" uid="uid://jwjlqvrtv4e" path="res://pngs/spirit_levels/spirit_level_4.png" id="5_lxenu"]
 [ext_resource type="Texture2D" uid="uid://cukmpwttlo54d" path="res://pngs/spirit_levels/spirit_level_5.png" id="6_k0fxl"]
+[ext_resource type="Texture2D" uid="uid://blbqk8uefasih" path="res://pngs/spirit_levels/spirit_level_6.png" id="7_lxenu"]
+[ext_resource type="Texture2D" uid="uid://cme4gp76bmjoq" path="res://pngs/spirit_levels/spirit_level_7.png" id="8_1i81c"]
 
 [resource]
 script = ExtResource("1_5hker")
-ghost_name = "Somber Spirit"
+ghost_name = "Shock"
 ghost_type = 1
-ghost_names = Array[String](["Somber Spirit", "Aching Spirit", "Mournful Spirit", "Hurtful Spirit", "Wailing Spirit", "Sobbing Spirit", "Anguished Spirit", "Sorrowful Spirit", "Broken Spirit", "Bitter Spirit"])
+ghost_names = Array[String](["Shock", "Denial", "Anger", "Bargaining", "Depression", "Coping", "Acceptance"])
 sprite_dict = Dictionary[int, CompressedTexture2D]({
 1: ExtResource("2_5pbv3"),
 2: ExtResource("3_k0fxl"),
 3: ExtResource("4_rk8q8"),
 4: ExtResource("5_lxenu"),
-5: ExtResource("6_k0fxl")
+5: ExtResource("6_k0fxl"),
+6: ExtResource("7_lxenu"),
+7: ExtResource("8_1i81c")
 })
-base_effect = 20
-base_cost = 100
+base_effect = 250
+base_cost = 500
 metadata/_custom_type_script = "uid://cvb7x2ajqyk63"

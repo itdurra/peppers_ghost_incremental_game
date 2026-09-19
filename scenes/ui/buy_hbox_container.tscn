@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://vpyho05b7oil"]
+
+[ext_resource type="Theme" uid="uid://61m5tmf8rp2c" path="res://resource/ghost_ui.tres" id="1_gxhg4"]
+[ext_resource type="Script" uid="uid://8q251jc88ff2" path="res://scripts/ui/hbox_tween_handler.gd" id="1_tvgmy"]
+[ext_resource type="Resource" uid="uid://c1kqsjboonfan" path="res://resource/ghosts/GhostResource.tres" id="2_7mjyv"]
+[ext_resource type="Texture2D" uid="uid://b3w60t3ecvak4" path="res://pngs/ghost_levels/ghost.png" id="3_mohtn"]
+[ext_resource type="Resource" uid="uid://bdf84eh5sd0st" path="res://resource/PlayerResource.tres" id="4_7mjyv"]
+[ext_resource type="Texture2D" uid="uid://dpqhf8dfj7vde" path="res://pngs/white_square_2x2.png" id="4_48dk4"]
+[ext_resource type="Texture2D" uid="uid://c5uy8b54peelo" path="res://pngs/orb.png" id="6_jr2ap"]
+[ext_resource type="Script" uid="uid://w0ck1iewkmck" path="res://scripts/ui/trigger_button_events.gd" id="8_mohtn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48dk4"]
+size = Vector2(582, 149)
+
+[node name="buy_hbox_container" type="HBoxContainer" unique_id=1939506024 node_paths=PackedStringArray("cooldown_bar", "buy_button", "price_label")]
+offset_transform_enabled = true
+theme = ExtResource("1_gxhg4")
+script = ExtResource("1_tvgmy")
+ghost_res = ExtResource("2_7mjyv")
+player_res = ExtResource("4_7mjyv")
+coin_path = ExtResource("6_jr2ap")
+cooldown_bar = NodePath("buy_button/TextureProgressBar")
+buy_button = NodePath("buy_button")
+price_label = NodePath("ghost_price")
+
+[node name="buy_button" type="Button" parent="." unique_id=1659609262]
+clip_children = 2
+custom_minimum_size = Vector2(580, 150)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+text = "Acceptance"
+icon = ExtResource("3_mohtn")
+icon_alignment = 2
+expand_icon = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="buy_button" unique_id=1464336433]
+custom_minimum_size = Vector2(580, 150)
+layout_mode = 0
+offset_right = 580.0
+offset_bottom = 150.0
+mouse_filter = 0
+value = 100.0
+fill_mode = 1
+nine_patch_stretch = true
+texture_progress = ExtResource("4_48dk4")
+tint_progress = Color(0.84705883, 0.7490196, 0.84705883, 1)
+
+[node name="Area2D" type="Area2D" parent="buy_button" unique_id=1312147805 node_paths=PackedStringArray("button")]
+collision_layer = 2
+input_pickable = false
+script = ExtResource("8_mohtn")
+button = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buy_button/Area2D" unique_id=738825949]
+position = Vector2(290, 74.5)
+shape = SubResource("RectangleShape2D_48dk4")
+
+[node name="ghost_price" type="RichTextLabel" parent="." unique_id=1641597344]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://pngs/orb.png[/img]1000"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="buy_button" to="." method="_on_pressed"]
+[connection signal="area_shape_entered" from="buy_button/Area2D" to="buy_button/Area2D" method="_on_area_shape_entered"]
+[connection signal="area_shape_exited" from="buy_button/Area2D" to="buy_button/Area2D" method="_on_area_shape_exited"]

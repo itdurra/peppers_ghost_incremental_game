@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cblqjp2fb3a4b"]
+
+[ext_resource type="Texture2D" uid="uid://thvvydkeuj8s" path="res://pngs/rain_particle_anim.png" id="1_pe2y8"]
+
+[resource]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_pe2y8")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 4
+particles_anim_loop = true

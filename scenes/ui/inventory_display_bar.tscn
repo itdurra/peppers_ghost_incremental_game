@@ -1,83 +1,90 @@
 [gd_scene format=3 uid="uid://cjb8d575wtkfh"]
 
+[ext_resource type="Theme" uid="uid://61m5tmf8rp2c" path="res://resource/ghost_ui.tres" id="1_3ieci"]
 [ext_resource type="Script" uid="uid://c7xbo5w8y6vyl" path="res://scripts/ui/inventory_display_bar.gd" id="1_q0imd"]
 [ext_resource type="Texture2D" uid="uid://buchqw2fspc73" path="res://pngs/empty_dot_12x12.png" id="1_sl168"]
 
 [node name="inventory_display_bar" type="HBoxContainer" unique_id=1130448351 node_paths=PackedStringArray("sprite_arr")]
+offset_transform_enabled = true
+theme = ExtResource("1_3ieci")
 script = ExtResource("1_q0imd")
 empty_image = ExtResource("1_sl168")
-sprite_arr = [NodePath("TextureRect"), NodePath("TextureRect2"), NodePath("TextureRect3"), NodePath("TextureRect4"), NodePath("TextureRect5"), NodePath("TextureRect6"), NodePath("TextureRect7"), NodePath("TextureRect8"), NodePath("TextureRect9"), NodePath("TextureRect10")]
+tween_start = Vector2(1000, 0)
+sprite_arr = [NodePath("TextureRect"), NodePath("TextureRect2"), NodePath("TextureRect3"), NodePath("TextureRect4"), NodePath("TextureRect5"), NodePath("TextureRect6"), NodePath("TextureRect7")]
 
 [node name="level_label" type="Label" parent="." unique_id=969579415]
 unique_name_in_owner = true
 layout_mode = 2
-text = "LEVEL 1"
+text = "S1"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=279479772]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("1_sl168")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=70839188]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("1_sl168")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="TextureRect3" type="TextureRect" parent="." unique_id=332706074]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("1_sl168")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="TextureRect4" type="TextureRect" parent="." unique_id=522784873]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("1_sl168")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="TextureRect5" type="TextureRect" parent="." unique_id=630619765]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("1_sl168")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="TextureRect6" type="TextureRect" parent="." unique_id=538113979]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("1_sl168")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="TextureRect7" type="TextureRect" parent="." unique_id=3370607]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("1_sl168")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="TextureRect8" type="TextureRect" parent="." unique_id=448927921]
-custom_minimum_size = Vector2(48, 48)
+visible = false
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("1_sl168")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="TextureRect9" type="TextureRect" parent="." unique_id=1280830359]
-custom_minimum_size = Vector2(48, 48)
+visible = false
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("1_sl168")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="TextureRect10" type="TextureRect" parent="." unique_id=108954838]
-custom_minimum_size = Vector2(48, 48)
+visible = false
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("1_sl168")
 expand_mode = 1

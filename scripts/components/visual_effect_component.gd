@@ -1,5 +1,7 @@
 extends Node
 
+class_name VisualEffectComponent
+
 #visual effect component that triggers GPUParticle3D nodes
 
 @export var coin_particles: GPUParticles3D

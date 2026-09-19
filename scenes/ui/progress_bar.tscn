@@ -1,42 +1,88 @@
 [gd_scene format=3 uid="uid://buda1y3nthghv"]
 
 [ext_resource type="Script" uid="uid://c84wgoskxcuva" path="res://scripts/ui/progress_bar.gd" id="1_46mgc"]
+[ext_resource type="Theme" uid="uid://61m5tmf8rp2c" path="res://resource/ghost_ui.tres" id="1_lv4uo"]
 [ext_resource type="Resource" uid="uid://bdf84eh5sd0st" path="res://resource/PlayerResource.tres" id="2_ydmtc"]
 [ext_resource type="Texture2D" uid="uid://c5uy8b54peelo" path="res://pngs/orb.png" id="3_aqhu8"]
 [ext_resource type="Texture2D" uid="uid://cdqmmgm2mlvds" path="res://pngs/water.png" id="4_w5apn"]
+[ext_resource type="Script" uid="uid://d1sj4x0uw64dk" path="res://scripts/go_to_scene_on_press.gd" id="6_ha664"]
+[ext_resource type="Texture2D" uid="uid://thvvydkeuj8s" path="res://pngs/rain_particle_anim.png" id="7_6vfxo"]
+[ext_resource type="Script" uid="uid://w0ck1iewkmck" path="res://scripts/ui/trigger_button_events.gd" id="8_qls0m"]
 
-[node name="ProgressBar" type="Control" unique_id=493097392 node_paths=PackedStringArray("progress_bar", "level_value", "exp_value", "exp_req_value", "coin_value", "water_value")]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5hnri"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 4
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_6vfxo"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.27483442, 1), 0.0, 0.0, 0, 0, Vector2(0.80132455, 0.99337745), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_6vfxo"]
+curve = SubResource("Curve_6vfxo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7jox1"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 1, 1)
+angle_min = 145.00002
+angle_max = 145.00002
+spread = 59.817
+initial_velocity_min = 176.26
+initial_velocity_max = 217.76999
+gravity = Vector3(0, 98, 0)
+scale_min = 0.0
+scale_max = 5.5699997
+scale_curve = SubResource("CurveTexture_6vfxo")
+anim_speed_min = 3.97
+anim_speed_max = 3.97
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_giuy6"]
+size = Vector2(120, 120)
+
+[node name="ProgressBar" type="Control" unique_id=493097392 node_paths=PackedStringArray("progress_bar", "level_value", "exp_value", "exp_req_value", "coin_value", "water_value", "level_up_effect")]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_46mgc")
-progress_bar = NodePath("VBoxContainer/ProgressBar")
-player_res = ExtResource("2_ydmtc")
-level_value = NodePath("VBoxContainer/GridContainer/LevelValue")
-exp_value = NodePath("VBoxContainer/GridContainer/ExpValue")
-exp_req_value = NodePath("VBoxContainer/GridContainer/ExpReqValue")
-coin_value = NodePath("VBoxContainer/GridContainer/CoinValue")
-water_value = NodePath("VBoxContainer/GridContainer/WaterValue")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1609363421]
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 63.0
-
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer" unique_id=277364493]
-custom_minimum_size = Vector2(1920, 36)
-layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("1_lv4uo")
+script = ExtResource("1_46mgc")
+progress_bar = NodePath("MarginContainer/VBoxContainer/ProgressBar")
+player_res = ExtResource("2_ydmtc")
+level_value = NodePath("GridContainer/LevelValue")
+exp_value = NodePath("GridContainer/ExpValue")
+exp_req_value = NodePath("GridContainer/ExpReqValue")
+coin_value = NodePath("MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/CoinValue")
+water_value = NodePath("MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer/WaterValue")
+level_up_effect = NodePath("GPUParticles2D")
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=143320926]
-layout_mode = 2
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=92797237]
+material = SubResource("CanvasItemMaterial_5hnri")
+position = Vector2(1619, 47)
+emitting = false
+amount = 20
+texture = ExtResource("7_6vfxo")
+lifetime = 3.0
+one_shot = true
+speed_scale = 4.0
+explosiveness = 0.57
+process_material = SubResource("ParticleProcessMaterial_7jox1")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=143320926]
+layout_mode = 0
+offset_left = 1925.0
+offset_top = 962.0
+offset_right = 2565.0
+offset_bottom = 1326.0
+scale = Vector2(-1, 1)
 columns = 3
 
-[node name="LevelLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1095500221]
+[node name="LevelLabel" type="Label" parent="GridContainer" unique_id=1095500221]
 layout_mode = 2
 text = "Level"
 
-[node name="LevelIcon" type="TextureRect" parent="VBoxContainer/GridContainer" unique_id=480914838]
+[node name="LevelIcon" type="TextureRect" parent="GridContainer" unique_id=480914838]
 custom_minimum_size = Vector2(12, 12)
 layout_mode = 2
 size_flags_vertical = 4
@@ -44,15 +90,15 @@ texture = ExtResource("3_aqhu8")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="LevelValue" type="Label" parent="VBoxContainer/GridContainer" unique_id=1534161668]
+[node name="LevelValue" type="Label" parent="GridContainer" unique_id=1534161668]
 layout_mode = 2
 text = "1"
 
-[node name="ExpReqLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1531186115]
+[node name="ExpReqLabel" type="Label" parent="GridContainer" unique_id=1531186115]
 layout_mode = 2
 text = "Exp. Req."
 
-[node name="ExpReqIcon" type="TextureRect" parent="VBoxContainer/GridContainer" unique_id=516148878]
+[node name="ExpReqIcon" type="TextureRect" parent="GridContainer" unique_id=516148878]
 custom_minimum_size = Vector2(12, 12)
 layout_mode = 2
 size_flags_vertical = 4
@@ -60,15 +106,15 @@ texture = ExtResource("3_aqhu8")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="ExpReqValue" type="Label" parent="VBoxContainer/GridContainer" unique_id=1109857798]
+[node name="ExpReqValue" type="Label" parent="GridContainer" unique_id=1109857798]
 layout_mode = 2
 text = "1"
 
-[node name="ExpLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1494074488]
+[node name="ExpLabel" type="Label" parent="GridContainer" unique_id=1494074488]
 layout_mode = 2
 text = "Exp."
 
-[node name="ExpIcon" type="TextureRect" parent="VBoxContainer/GridContainer" unique_id=1071857268]
+[node name="ExpIcon" type="TextureRect" parent="GridContainer" unique_id=1071857268]
 custom_minimum_size = Vector2(12, 12)
 layout_mode = 2
 size_flags_vertical = 4
@@ -76,31 +122,88 @@ texture = ExtResource("3_aqhu8")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="ExpValue" type="Label" parent="VBoxContainer/GridContainer" unique_id=1614536704]
+[node name="ExpValue" type="Label" parent="GridContainer" unique_id=1614536704]
 layout_mode = 2
 text = "1"
 
-[node name="CoinLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1213026988]
+[node name="CoinLabel" type="Label" parent="GridContainer" unique_id=1213026988]
 layout_mode = 2
 text = "Coins"
 
-[node name="CoinIcon" type="TextureRect" parent="VBoxContainer/GridContainer" unique_id=607087609]
-custom_minimum_size = Vector2(12, 12)
+[node name="WaterLabel" type="Label" parent="GridContainer" unique_id=1447683196]
+layout_mode = 2
+text = "Water"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1697026037]
+custom_minimum_size = Vector2(2048, 0)
+layout_mode = 1
+offset_right = 1524.0
+offset_bottom = 135.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1609363421]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer" unique_id=277364493]
+custom_minimum_size = Vector2(1500, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+value = 50.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1556296437]
+layout_mode = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=929430638]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer" unique_id=168685600]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=556127866]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer" unique_id=1460016073]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer" unique_id=122224086]
+layout_mode = 2
+
+[node name="CoinIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=607087609]
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("3_aqhu8")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="CoinValue" type="Label" parent="VBoxContainer/GridContainer" unique_id=2026932808]
+[node name="CoinValue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer" unique_id=2026932808]
 layout_mode = 2
 text = "20"
 
-[node name="WaterLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1447683196]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=1209316069]
+visible = false
 layout_mode = 2
-text = "Water"
+theme_override_constants/margin_right = 0
 
-[node name="WaterIcon" type="TextureRect" parent="VBoxContainer/GridContainer" unique_id=529959880]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer2" unique_id=1792450909]
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=373227347]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer3" unique_id=1237112079]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer" unique_id=1841155915]
+layout_mode = 2
+
+[node name="WaterIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2" unique_id=529959880]
 custom_minimum_size = Vector2(12, 12)
 layout_mode = 2
 size_flags_vertical = 4
@@ -108,6 +211,35 @@ texture = ExtResource("4_w5apn")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="WaterValue" type="Label" parent="VBoxContainer/GridContainer" unique_id=720222065]
+[node name="WaterValue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer3/HBoxContainer" unique_id=720222065]
 layout_mode = 2
 text = "10"
+
+[node name="quit_button" type="Button" parent="." unique_id=1950265924]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_left = 1939.0
+offset_top = 5.0
+offset_right = 2039.0
+offset_bottom = 109.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_lv4uo")
+text = "X"
+script = ExtResource("6_ha664")
+target_path = "res://scenes/main_menu.tscn"
+
+[node name="Area2D" type="Area2D" parent="quit_button" unique_id=1210737405 node_paths=PackedStringArray("button")]
+collision_layer = 2
+input_pickable = false
+script = ExtResource("8_qls0m")
+button = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="quit_button/Area2D" unique_id=1145593968]
+position = Vector2(50, 52)
+shape = SubResource("RectangleShape2D_giuy6")
+
+[connection signal="pressed" from="quit_button" to="quit_button" method="_on_pressed"]
+[connection signal="area_shape_entered" from="quit_button/Area2D" to="quit_button/Area2D" method="_on_area_shape_entered"]
+[connection signal="area_shape_exited" from="quit_button/Area2D" to="quit_button/Area2D" method="_on_area_shape_exited"]

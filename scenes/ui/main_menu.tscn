@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://bmiomoho6invm"]
+
+[ext_resource type="Theme" uid="uid://61m5tmf8rp2c" path="res://resource/ghost_ui.tres" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://d1sj4x0uw64dk" path="res://scripts/go_to_scene_on_press.gd" id="2_1g8jr"]
+[ext_resource type="PackedScene" uid="uid://cnrv5tl2dqkll" path="res://assets/custom_mouse_cursor/set_custom_mouse_cursors.tscn" id="3_1g8jr"]
+[ext_resource type="Script" uid="uid://w0ck1iewkmck" path="res://scripts/ui/trigger_button_events.gd" id="3_uhagc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wb0q5"]
+size = Vector2(440, 120)
+
+[node name="MainMenu" type="Control" unique_id=552214194]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(-0.25, 0.25)
+theme = ExtResource("1_l6cm7")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2027826404]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -234.0
+offset_top = -61.5
+offset_right = 234.0
+offset_bottom = 61.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=2060618525]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer" unique_id=1479844313]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=1105567296]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1883198600]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer" unique_id=1932691338]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=2014780674]
+texture_filter = 1
+layout_mode = 2
+text = "Stages of Grief"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=285538891]
+layout_mode = 2
+
+[node name="button_vbox" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=924063712]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/button_vbox" unique_id=965949606]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+text = "New Game"
+script = ExtResource("2_1g8jr")
+target_path = "res://scenes/main.tscn"
+
+[node name="Area2D" type="Area2D" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/button_vbox/Button" unique_id=1575560866 node_paths=PackedStringArray("button")]
+collision_layer = 2
+input_pickable = false
+script = ExtResource("3_uhagc")
+button = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/button_vbox/Button/Area2D" unique_id=20974267]
+position = Vector2(210, 52)
+shape = SubResource("RectangleShape2D_wb0q5")
+
+[node name="SetCustomMouseCursors" parent="." unique_id=1980828153 instance=ExtResource("3_1g8jr")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/button_vbox/Button" to="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/button_vbox/Button" method="_on_pressed"]
+[connection signal="area_shape_entered" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/button_vbox/Button/Area2D" to="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/button_vbox/Button/Area2D" method="_on_area_shape_entered"]
+[connection signal="area_shape_exited" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/button_vbox/Button/Area2D" to="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/button_vbox/Button/Area2D" method="_on_area_shape_exited"]

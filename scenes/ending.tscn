@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://4kr1bv4kwjmr"]
+
+[ext_resource type="PackedScene" uid="uid://c6txjcln4ooor" path="res://scenes/3d_particle_rain.tscn" id="2_nfmnx"]
+[ext_resource type="PackedScene" uid="uid://b5qm6itikjin1" path="res://scenes/ui/ending.tscn" id="3_2x1jc"]
+[ext_resource type="Material" uid="uid://p35qswoj2kgd" path="res://resource/black_background.tres" id="3_qa3ag"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_wu84c"]
+size = Vector2(60, 30)
+
+[node name="MainMenu" type="Node3D" unique_id=1750734119]
+
+[node name="3dParticleRain" parent="." unique_id=274281622 instance=ExtResource("2_nfmnx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.643735, 12.667948, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1013596032]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.415785)
+
+[node name="wall" type="MeshInstance3D" parent="Camera3D" unique_id=106677068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.134186, -16.015972)
+mesh = SubResource("QuadMesh_wu84c")
+surface_material_override/0 = ExtResource("3_qa3ag")
+
+[node name="Ending" parent="." unique_id=410941071 instance=ExtResource("3_2x1jc")]

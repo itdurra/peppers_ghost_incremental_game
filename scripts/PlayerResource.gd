@@ -4,7 +4,10 @@ class_name PlayerResource extends Resource
 @export var water: int = 0
 @export var level: int = 0
 @export var experience: int = 0
-@export var exp_required: int = 10 
+@export var exp_required: int = 20
+
+@export var base_exp: int = 100
+@export var exp_mult: float = 1.25
 
 #inventory dictionary for ghosts
 @export var ghosts: Array[GhostResource]
@@ -77,11 +80,13 @@ func set_exp_required(value_local: int) -> void:
 
 #------------------ inventory --------------------#
 
+#central method for adding coins
+#increases with player level as well
 func add_coins(value_local: int) -> void:
 	if value_local <= 0:
 		return
 
-	self.set_coins(value_local + self.get_coins())
+	self.set_coins((value_local * self.get_level()) + self.get_coins())
 	self.add_exp(value_local)
 
 	self._notify_inventory()
@@ -152,8 +157,8 @@ func next_level() -> void:
 	self.set_level(self.get_level() + 1)
 
 	var temp_exp_required = int(
-		10 #base req for level 2
-		* 1.25 #mult
+		base_exp #base req for level 2
+		* exp_mult #mult
 		* self.get_level() #next level - 1
 	)
 	self.set_exp_required(temp_exp_required)

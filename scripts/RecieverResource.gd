@@ -37,7 +37,7 @@ func get_effect_amount() -> int:
 	var effect_local = int(
 		base_effect #base req for level 2
 		* effect_mult #mult
-		* ((level * 10) + count) #next level - 1
+		* ((level * Constants.MAX_INV) + count) #next level - 1
 	)
 
 	if effect_local == 0:
@@ -50,7 +50,7 @@ func get_cost() -> int:
 	var cost_local = int(
 		base_cost #base req for level 2
 		* cost_mult #mult
-		* ((level * 10) + count) #next level - 1
+		* ((level * Constants.MAX_INV) + count) #next level - 1
 	)
 
 	if cost_local == 0:
@@ -59,7 +59,7 @@ func get_cost() -> int:
 	return cost_local
 
 func buy_reciever() -> void:
-	if self.get_count() >= 10:
+	if self.get_count() >= Constants.MAX_INV:
 		self.reset_count()
 		self.increment_level()
 		EventBus.emit_clear_reciever(self.get_reciever_type())

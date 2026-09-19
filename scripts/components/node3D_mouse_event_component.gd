@@ -14,8 +14,10 @@ class_name Node3DMouseEventComponent
 
 var t: Tween
 
-#mouse enter
+#mouse enter, change mouse cursor
 func _on_area_3d_mouse_entered() -> void:
+	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+
 	if t:
 		t.kill()
 
@@ -24,8 +26,10 @@ func _on_area_3d_mouse_entered() -> void:
 	t.set_ease(Tween.EASE_IN_OUT)
 	t.tween_property(pivot, "scale", target_scale, .3)
 
-#mouse exit
+#mouse exit, change cursor
 func _on_area_3d_mouse_exited() -> void:
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+
 	if t:
 		t.kill()
 

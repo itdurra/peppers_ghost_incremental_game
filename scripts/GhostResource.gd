@@ -11,6 +11,7 @@ class_name GhostResource extends Resource
 @export var base_cost: int = 10
 @export var effect_mult: float = 1.1
 @export var cost_mult: float = 1.25
+@export var is_available: bool = false
 
 @export_category("leave_these")
 @export var count: int = 0
@@ -21,6 +22,9 @@ func is_same_ghost_type(ghost_type_local: GhostEnum.GhostType) -> bool:
 	return ghost_type == ghost_type_local
 
 func get_sprite() -> CompressedTexture2D:
+	if level + 1 > Constants.MAX_INV:
+		return sprite_dict[Constants.MAX_INV]
+
 	return sprite_dict[level + 1]
 
 func get_count() -> int:
@@ -35,6 +39,12 @@ func get_level() -> int:
 
 func get_ghost_type() -> GhostEnum.GhostType:
 	return ghost_type
+
+func get_is_available() -> bool:
+	return is_available
+
+func set_is_available(value_local: bool) -> void:
+	is_available = value_local
 
 func get_effect_amount() -> int:
 	#get cost
@@ -54,7 +64,7 @@ func get_cost() -> int:
 	var cost_local = int(
 		base_cost #base req for level 2
 		* cost_mult #mult
-		* ((level * 10) + count) #next level - 1
+		* ((level * Constants.MAX_INV) + count) #next level - 1
 	)
 
 	if cost_local == 0:
@@ -63,7 +73,9 @@ func get_cost() -> int:
 	return cost_local
 
 func buy_ghost() -> void:
-	if self.get_count() >= (10 - 1):
+	if self.get_count() >= (Constants.MAX_INV):
+		if self.level >= Constants.MAX_INV: #game over
+			return
 		self.reset_count()
 		self.increment_count()
 		self.increment_level()
@@ -77,8 +89,8 @@ func get_ghost_name() -> String:
 func increment_level() -> void:
 	level += 1
 	#change name depending on level
-	if level <= 10:
-		ghost_name = ghost_names[level]
+	if level <= Constants.MAX_INV:
+		ghost_name = ghost_names[level - 1]
 	EventBus.emit_inventory_changed()
 
 func increment_count() -> void:

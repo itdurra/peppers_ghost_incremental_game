@@ -6,19 +6,23 @@
 [ext_resource type="Texture2D" uid="uid://cogt3pur0crg5" path="res://pngs/wisp_levels/whisp_level_3.png" id="4_5tqge"]
 [ext_resource type="Texture2D" uid="uid://bw6iqgvhelmti" path="res://pngs/wisp_levels/whisp_level_4.png" id="5_csocx"]
 [ext_resource type="Texture2D" uid="uid://cg8f8q7g8dx2c" path="res://pngs/wisp_levels/whisp_level_5.png" id="6_4dpsa"]
+[ext_resource type="Texture2D" uid="uid://ddc1rtuprmwhb" path="res://pngs/wisp_levels/whisp_level_6.png" id="7_5tqge"]
+[ext_resource type="Texture2D" uid="uid://bm64lhkq6ux6d" path="res://pngs/wisp_levels/whisp_level_7.png" id="8_csocx"]
 
 [resource]
 script = ExtResource("1_of8ni")
-ghost_name = "Howling Wisp"
+ghost_name = "Shock"
 ghost_type = 2
-ghost_names = Array[String](["Howling Wisp", "Bawling Wisp", "Crowing Wisp", "Screeching Wisp", "Shrill Wisp", "Yowling Wisp", "Squawking Wisp", "Hollering Wisp", "Screaming Wisp", "Shrieking Wisp"])
+ghost_names = Array[String](["Shock", "Denial", "Anger", "Bargaining", "Depression", "Coping", "Acceptance"])
 sprite_dict = Dictionary[int, CompressedTexture2D]({
 1: ExtResource("2_p1d81"),
 2: ExtResource("3_w7vkw"),
 3: ExtResource("4_5tqge"),
 4: ExtResource("5_csocx"),
-5: ExtResource("6_4dpsa")
+5: ExtResource("6_4dpsa"),
+6: ExtResource("7_5tqge"),
+7: ExtResource("8_csocx")
 })
-base_effect = 30
+base_effect = 600
 base_cost = 1000
 metadata/_custom_type_script = "uid://cvb7x2ajqyk63"

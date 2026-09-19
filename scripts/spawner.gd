@@ -8,6 +8,9 @@ class_name EntitySpawner
 @export var scene_res: EntityScenesResource
 @export var spawn_point: Node3D
 
+#edge case for well
+@export var well_spawn_point: Node3D
+
 func _ready() -> void:
 	EventBus.connect("spawn_ghost", _spawn_ghost)
 	EventBus.connect("spawn_reciever", _spawn_reciever)
@@ -23,7 +26,6 @@ func _spawn_reciever(type_local: RecieverEnum.RecieverType) -> void:
 	var node: Node = reciever_scene.instantiate()
 	node.setup()
 	spawn_point.add_child(node)
-
 	
 
 	

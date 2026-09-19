@@ -5,12 +5,18 @@
 [ext_resource type="Material" uid="uid://cm4xjww07vwqs" path="res://resource/water.tres" id="2_7gjhn"]
 [ext_resource type="Script" uid="uid://cgtulsunxhcmn" path="res://scripts/components/movement_component.gd" id="2_s8chh"]
 [ext_resource type="Material" uid="uid://dqcf8k1qrf5ut" path="res://resource/coin.tres" id="3_7gjhn"]
+[ext_resource type="Script" uid="uid://i246nbo7fwvo" path="res://scripts/ui/trigger_reciever_events.gd" id="3_naiv4"]
+[ext_resource type="Texture2D" uid="uid://cjetfgubpo8qy" path="res://icon.svg" id="4_h4w5u"]
 [ext_resource type="Script" uid="uid://dic7ts0u86wo4" path="res://scripts/components/visual_effect_component.gd" id="5_7gjhn"]
 [ext_resource type="Script" uid="uid://ckoakwxhu8mxl" path="res://scripts/components/node3D_mouse_event_component.gd" id="7_clbec"]
 [ext_resource type="Script" uid="uid://d11e1vv7mw56b" path="res://scripts/components/sprite_switcher_component.gd" id="7_t37sp"]
 [ext_resource type="Resource" uid="uid://bpcvsfdrnk6wx" path="res://resource/recievers/WishingWell.tres" id="8_t37sp"]
 [ext_resource type="Script" uid="uid://bxiyg4xlsn3qe" path="res://scripts/components/effect_component.gd" id="10_lsqf8"]
 [ext_resource type="Resource" uid="uid://bdf84eh5sd0st" path="res://resource/PlayerResource.tres" id="11_hnd3p"]
+[ext_resource type="Material" uid="uid://htwy6go461hm" path="res://resource/opacity_wall.tres" id="12_hnd3p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jox1"]
+size = Vector2(40, 40)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dtdkv"]
 direction = Vector3(0, 1, 0)
@@ -29,12 +35,47 @@ initial_velocity_max = 5.0
 size = Vector2(0.1, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7jox1"]
-size = Vector3(0.13, 0.13, 0.13)
+
+[sub_resource type="SphereMesh" id="SphereMesh_naiv4"]
+radius = 1.298
 
 [node name="WishingWell" type="Node3D" unique_id=365239258 node_paths=PackedStringArray("sprite_switcher_component")]
 script = ExtResource("1_yyefp")
 reciever_res = ExtResource("8_t37sp")
 sprite_switcher_component = NodePath("SpriteSwitcherComponent")
+
+[node name="Control" type="Control" parent="." unique_id=2110464402]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=1479881110]
+visible = false
+layout_mode = 0
+offset_left = 226.0
+offset_top = 251.0
+offset_right = 266.0
+offset_bottom = 291.0
+mouse_filter = 2
+texture = ExtResource("4_h4w5u")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Area2D" type="Area2D" parent="Control/TextureRect" unique_id=473749041 node_paths=PackedStringArray("wishing_well_area", "visual_effect_component", "sprite_hover_component", "effect_component")]
+position = Vector2(49, 51)
+collision_layer = 2
+input_pickable = false
+monitorable = false
+script = ExtResource("3_naiv4")
+wishing_well_area = NodePath("../../../origin/pivot/visual_sprite/Area3D")
+visual_effect_component = NodePath("../../../VisualEffectComponent")
+sprite_hover_component = NodePath("../../../3DSpriteMouseHoverMovement")
+effect_component = NodePath("../../../EffectComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/TextureRect/Area2D" unique_id=1164439303]
+position = Vector2(-29, -31)
+shape = SubResource("RectangleShape2D_7jox1")
 
 [node name="origin" type="Node3D" parent="." unique_id=357558537]
 
@@ -65,6 +106,17 @@ collision_layer = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="origin/pivot/visual_sprite/Area3D" unique_id=1441762197]
 shape = SubResource("BoxShape3D_7jox1")
 
+[node name="mini_wall" type="MeshInstance3D" parent="origin/pivot/visual_sprite" unique_id=676047292]
+transform = Transform3D(1, 0, 0, 0, -4.4703484e-08, 1, 0, -1, -4.4703484e-08, 0, -0.6404114, -1.1018906)
+mesh = SubResource("SphereMesh_naiv4")
+surface_material_override/0 = ExtResource("12_hnd3p")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="origin/pivot/visual_sprite" unique_id=167247959]
+transform = Transform3D(1, 0, 0, 0, 0.9910735, 0.1333168, 0, -0.1333168, 0.9910735, 0, 0.10393524, 0.092157125)
+light_color = Color(0.84705883, 0.7490196, 0.84705883, 1)
+spot_range = 1.037
+spot_angle = 23.55
+
 [node name="MovementComponent" type="Node" parent="." unique_id=1685339187 node_paths=PackedStringArray("origin", "pivot")]
 script = ExtResource("2_s8chh")
 origin = NodePath("../origin")
@@ -92,6 +144,8 @@ script = ExtResource("10_lsqf8")
 player_res = ExtResource("11_hnd3p")
 reciever_res = ExtResource("8_t37sp")
 
+[connection signal="area_shape_entered" from="Control/TextureRect/Area2D" to="Control/TextureRect/Area2D" method="_on_area_shape_entered"]
+[connection signal="area_shape_exited" from="Control/TextureRect/Area2D" to="Control/TextureRect/Area2D" method="_on_area_shape_exited"]
 [connection signal="area_entered" from="origin/pivot/visual_sprite/Area3D" to="MovementComponent" method="_shake_movement"]
 [connection signal="area_entered" from="origin/pivot/visual_sprite/Area3D" to="VisualEffectComponent" method="emit_water"]
 [connection signal="input_event" from="origin/pivot/visual_sprite/Area3D" to="VisualEffectComponent" method="_on_area_3d_input_event"]

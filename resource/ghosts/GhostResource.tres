@@ -6,16 +6,22 @@
 [ext_resource type="Texture2D" uid="uid://dwrbn1m00olvd" path="res://pngs/ghost_levels/ghost_level_3.png" id="4_o5s07"]
 [ext_resource type="Texture2D" uid="uid://cy7h5rfwbn2bm" path="res://pngs/ghost_levels/ghost_level_4.png" id="5_4k7qx"]
 [ext_resource type="Texture2D" uid="uid://b3xxbcb418dvn" path="res://pngs/ghost_levels/ghost_level_5.png" id="6_ijm10"]
+[ext_resource type="Texture2D" uid="uid://dvqpicthleho3" path="res://pngs/ghost_levels/ghost_level_6.png" id="7_o5s07"]
+[ext_resource type="Texture2D" uid="uid://bmtxtpqgy33l6" path="res://pngs/ghost_levels/ghost_level_7.png" id="8_4k7qx"]
 
 [resource]
 script = ExtResource("1_aplum")
-ghost_name = "Rumbling Ghost"
-ghost_names = Array[String](["Rumbling Ghost", "Peckish Ghost", "Reflux Ghost", "Hungry Ghost", "Ravenous Ghost", "Starved Ghost", "Famished Ghost", "Wolfish Ghost", "Insatiable Ghost", "Gluttonous Ghost"])
+ghost_name = "Shock"
+ghost_names = Array[String](["Shock", "Denial", "Anger", "Bargaining", "Depression", "Coping", "Acceptance"])
 sprite_dict = Dictionary[int, CompressedTexture2D]({
 1: ExtResource("2_ijm10"),
 2: ExtResource("3_7icj7"),
 3: ExtResource("4_o5s07"),
 4: ExtResource("5_4k7qx"),
-5: ExtResource("6_ijm10")
+5: ExtResource("6_ijm10"),
+6: ExtResource("7_o5s07"),
+7: ExtResource("8_4k7qx")
 })
+base_effect = 50
+base_cost = 100
 metadata/_custom_type_script = "uid://cvb7x2ajqyk63"

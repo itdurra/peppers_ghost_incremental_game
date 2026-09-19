@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://b5qm6itikjin1"]
+
+[ext_resource type="Theme" uid="uid://61m5tmf8rp2c" path="res://resource/ghost_ui.tres" id="1_2x1jc"]
+[ext_resource type="Script" uid="uid://bxu2jfkn84ij" path="res://scripts/ui/mouse_reverser.gd" id="2_d0ra4"]
+[ext_resource type="Script" uid="uid://d1sj4x0uw64dk" path="res://scripts/go_to_scene_on_press.gd" id="2_nfmnx"]
+[ext_resource type="Texture2D" uid="uid://cwan838qa68r5" path="res://assets/custom_mouse_cursor/cursor.png" id="3_bugvk"]
+[ext_resource type="Script" uid="uid://w0ck1iewkmck" path="res://scripts/ui/trigger_button_events.gd" id="3_qa3ag"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5amew"]
+size = Vector2(120, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_woslg"]
+
+[node name="Ending" type="Control" unique_id=410941071]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2x1jc")
+
+[node name="quit_button" type="Button" parent="." unique_id=1526384661]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_left = 503.0
+offset_top = 8.0
+offset_right = 603.0
+offset_bottom = 112.0
+scale = Vector2(-0.25, 0.25)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_2x1jc")
+text = "X"
+script = ExtResource("2_nfmnx")
+target_path = "res://scenes/main_menu.tscn"
+
+[node name="Area2D" type="Area2D" parent="quit_button" unique_id=1680147357 node_paths=PackedStringArray("button")]
+collision_layer = 2
+input_pickable = false
+script = ExtResource("3_qa3ag")
+button = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="quit_button/Area2D" unique_id=1476271960]
+position = Vector2(50, 52)
+shape = SubResource("RectangleShape2D_5amew")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=482780991]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 59.0
+offset_top = -52.0
+offset_right = 541.0
+offset_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(-0.25, 0.25)
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1348563480]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer" unique_id=2028857564]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=236762452]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=767162624]
+layout_mode = 2
+text = "You did it!"
+
+[node name="Label2" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1176656004]
+layout_mode = 2
+text = "The End"
+horizontal_alignment = 1
+
+[node name="mouse_reverser" type="Control" parent="." unique_id=1114012727 node_paths=PackedStringArray("mouse_image", "click_tracker")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_d0ra4")
+mouse_image = NodePath("default_cursor")
+click_tracker = NodePath("click_tracker")
+
+[node name="default_cursor" type="TextureRect" parent="mouse_reverser" unique_id=1048697591]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+mouse_filter = 2
+texture = ExtResource("3_bugvk")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Area2D" type="Area2D" parent="mouse_reverser/default_cursor" unique_id=561743429]
+collision_mask = 0
+input_pickable = false
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mouse_reverser/default_cursor/Area2D" unique_id=1250355948]
+position = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_woslg")
+
+[node name="click_tracker" type="TextureRect" parent="mouse_reverser" unique_id=890757703]
+visible = false
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+texture = ExtResource("3_bugvk")
+expand_mode = 1
+stretch_mode = 4
+
+[connection signal="pressed" from="quit_button" to="quit_button" method="_on_pressed"]
+[connection signal="area_shape_entered" from="quit_button/Area2D" to="quit_button/Area2D" method="_on_area_shape_entered"]
+[connection signal="area_shape_exited" from="quit_button/Area2D" to="quit_button/Area2D" method="_on_area_shape_exited"]

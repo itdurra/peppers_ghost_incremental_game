@@ -14,6 +14,8 @@ var cost: int
 var level: int
 var gname: String
 var count: int
+var effect: int
+var texture: CompressedTexture2D
 
 var t: Tween
 
@@ -66,11 +68,24 @@ func _update_button() -> void:
 	cost = ghost_res.get_cost()
 	level = ghost_res.get_level()
 	count = ghost_res.get_count()
+	effect = ghost_res.get_effect_amount()
+	texture = ghost_res.get_sprite()
 
-	if count >= (10 - 1):
+	self.icon = texture
+
+	if count >= (Constants.MAX_INV):
 		self.text = str(tr("PRESTIGE"))
 	else:
-		self.text = str(tr(gname))
+		var rate: int = (
+			effect * (count + (level * Constants.MAX_INV))
+		)
+
+		if rate == 0:
+			self.text = str(tr(gname))
+		else:
+			#removing rate display to make UI bigger
+			##self.text = str(tr(gname), " +", rate ,"/s")
+			self.text = str(tr(gname))
 
 	self._check_enable_button()
 
@@ -79,3 +94,12 @@ func _on_pressed() -> void:
 	player_res.spend_coins(cost)
 	self._update_button()
 	EventBus.emit_spawn_ghost(ghost_type)
+
+func tween_in() -> void:
+	if t:
+		return
+
+	t = create_tween()
+	t.set_trans(Tween.TRANS_CUBIC)
+	t.set_ease(Tween.EASE_IN_OUT)
+	t.tween_property(self, "offset_transform_position", Vector2(0,0), tween_time)

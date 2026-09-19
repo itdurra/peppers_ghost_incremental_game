@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PeppersGhost"
-run/main_scene="uid://x6n3mtb8rlxq"
+run/main_scene="uid://cw844fe782djr"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,14 +19,16 @@ config/icon="res://icon.svg"
 
 GhostEnum="*uid://b36prbk0pn50u"
 RecieverEnum="*uid://dmgl40gqn1ouk"
+Constants="*uid://xwvwkbolo3sv"
 EventBus="*uid://c28d4fr2uu532"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/size/viewport_width=512
+window/size/viewport_height=384
+window/size/resizable=false
+window/size/maximize_disabled=true
+window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
 [input]
@@ -39,7 +41,9 @@ interact={
 
 [layer_names]
 
+2d_physics/layer_1="mouse"
 3d_physics/layer_1="ghosts"
+2d_physics/layer_2="button"
 3d_physics/layer_2="recievers"
 
 [physics]

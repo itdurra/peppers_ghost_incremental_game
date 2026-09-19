@@ -48,4 +48,4 @@ script = ExtResource("6_eyij8")
 visual_sprite = NodePath("../origin/pivot/visual_sprite")
 res = ExtResource("7_k6c3x")
 
-[connection signal="area_entered" from="origin/pivot/visual_sprite/Area3D" to="EffectComponent" method="add_water"]
+[connection signal="area_entered" from="origin/pivot/visual_sprite/Area3D" to="EffectComponent" method="add_coins"]
